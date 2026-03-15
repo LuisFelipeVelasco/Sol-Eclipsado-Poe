@@ -19,6 +19,17 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
+        GuardarLongitud= palabraField.getLength();
+        if(GuardarLongitud<6 || GuardarLongitud>12){
+            welcomeText.setText("La palabra debe ser entre 6 y 12 letras");
+            palabraField.setText("");
+            return;
+
+
+
+        }else {
+
+        }
 
         welcomeText.setText("Welcome to JavaFX Application!");
 
