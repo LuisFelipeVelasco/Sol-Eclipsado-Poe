@@ -6,7 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 
+/*
+@author Jeronimo Rojas 2021517760-3743
+@version 1.0.4
 
+ */
 public class HelloController {
    /*
    Creamos variables
