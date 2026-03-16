@@ -65,29 +65,34 @@ public class PlayController {
     protected void ControladorCampoDeTexto(KeyEvent keyEvent){
         TextField textField=(TextField) keyEvent.getSource();
         String Entrada=textField.getText();
-        ManejarIngresoDeUnCaracterEnCampoDeTexto(textField,Entrada);
-        ManejarIngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada);
+        if(ManejarIngresoDeUnCaracterEnCampoDeTexto(textField,Entrada)&& ManejarIngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)){
+            VerificarEntradaCoincideEnPalabraSecreta(textField);
+        }
+
     }
 
     //Evita que el usuario ingrese mas de un caracter a un campo de texto
-    protected void ManejarIngresoDeUnCaracterEnCampoDeTexto(TextField textField,String Entrada){
+    protected boolean ManejarIngresoDeUnCaracterEnCampoDeTexto(TextField textField,String Entrada){
         if (Entrada.length()>1){
                 AdvertenciaText.setText("Relax.. Solo 1 caracter por campo");
                 textField.setText("");
-
+                return false;
         }
+        return true;
     }
 
     //Evita que el usuario ingrese un caracter especial o un numero a un campo de texto
-    protected void ManejarIngresoDeSoloLetrasEnCampoDeTexto(TextField textField,String Entrada){
+    protected boolean ManejarIngresoDeSoloLetrasEnCampoDeTexto(TextField textField,String Entrada){
         if (!Entrada.matches("\\p{L}+") && !Entrada.isEmpty()) {
             AdvertenciaText.setText("Ojo..  nada de numeros o caracteres especiales");
             textField.setText("");
+            return false;
         }
+        return true;
     }
-
-
-
+    protected  void VerificarEntradaCoincideEnPalabraSecreta(TextField textField){
+        System.out.println(textField);
+    }
 }
 
 
