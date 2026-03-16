@@ -34,9 +34,9 @@
                </VBox.margin>
             </HBox>
 
-            <Label fx:id="welcomeText" prefWidth="25.0" style="-fx-text-fill: red; -fx-font-size: 15;">
+            <Label fx:id="AdvertenciaText" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="365.0" style="-fx-text-fill: red; -fx-font-size: 15;" textAlignment="CENTER">
                <VBox.margin>
-                  <Insets top="15.0" />
+                  <Insets top="5.0" />
                </VBox.margin>
             </Label>
 
