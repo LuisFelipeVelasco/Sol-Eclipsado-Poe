@@ -19,7 +19,7 @@
 
             <ImageView fitHeight="100.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@IMAGENES/Sol_6.png" />
+                  <Image url="@IMAGENES/Sol_1.png" />
                </image>
             </ImageView>
 
@@ -29,7 +29,7 @@
                </VBox.margin>
             </Label>
 
-            <TextField fx:id="palabraField" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"  prefHeight="35.0" prefWidth="225.0" style="-fx-font-size: 20; -fx-border-color: black; -fx-border-width: 2;">
+            <TextField fx:id="palabraField" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="225.0" style="-fx-font-size: 20; -fx-border-color: black; -fx-border-width: 2;">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>

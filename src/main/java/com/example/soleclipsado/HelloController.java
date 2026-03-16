@@ -1,9 +1,16 @@
 package com.example.soleclipsado;
+import java.io.IOException;
 import java.text.Normalizer;
 import java.util.Locale;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 
 /*
@@ -12,26 +19,33 @@ import javafx.scene.control.TextField;
 
  */
 public class HelloController {
-    /*
-    Creamos variables
-     */
+
     @FXML
     private Label welcomeText;
     @FXML
     private TextField palabraField;
-    String GuardarPalabra; //esta variable sera utilizada para obtener el texto que el usuario ponga en el TextField
-    int GuardarLongitud;
-    String Normalizar; //esta variable sera utilizada para guardar los cambios que se haran para pasar de mayusculas y tildes a solo minusculas
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @FXML
-    protected boolean onHelloButtonClick() {
-        return  VerificarCaracteresEspeciales() && VerificarLongitudPalabra();
-
+    protected void onHelloButtonClick() throws IOException {
+        if (VerificarCaracteresEspeciales() && VerificarLongitudPalabra()){
+            String PalabraSecreta=ObtenerPalabraVerificada();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaAdivinarPalabra.fxml")); //Carga el archivo fxmLoader
+            root=fxmlLoader.load(); // Carga los componentes de fxmLoader
+            PlayController playController = fxmlLoader.getController(); // Crea una instancia del controlador de VistaAdivinarPalabra.fxml
+            playController.MostrarPalabraSecreta(PalabraSecreta);
+            stage=(Stage)palabraField.getScene().getWindow(); //palabraField sabe en que escena vive
+            scene=new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        };
     }
     //revisa si la palabra guardada tiene entre 6 y 12 letras, caso contrario tira advertencia y reinicia la palabra en blanco
     protected boolean VerificarLongitudPalabra() {
-        GuardarLongitud = palabraField.getLength(); //guarda la longitud de la palabra escrita pór el usuario
-        if (GuardarLongitud < 6 || GuardarLongitud > 12) {
+        Integer GuardarLongitudPalabra = palabraField.getLength(); //guarda la longitud de la palabra escrita pór el usuario
+        if (GuardarLongitudPalabra < 6 || GuardarLongitudPalabra > 12) {
             welcomeText.setText("La palabra debe ser entre 6 y 12 letras");
             palabraField.setText("");
             return false;
@@ -40,7 +54,7 @@ public class HelloController {
     }
     //revisa si la palabra tiene espacios o caracteres especiales, caso contrario tira una advertencia y reinicia la palabra a blanco
     protected  boolean VerificarCaracteresEspeciales(){
-        GuardarPalabra = palabraField.getText(); //guarda la palabra escrita pór el usuario
+        String GuardarPalabra = palabraField.getText(); //guarda la palabra escrita pór el usuario
         if (!GuardarPalabra.matches("\\p{L}+")) {
             welcomeText.setText("La palabra no puede tener espacios ni caracteres especiales");
             palabraField.setText("");
@@ -49,10 +63,10 @@ public class HelloController {
         return true;
     }
     protected String ObtenerPalabraVerificada(){
+        String GuardarPalabra=palabraField.getText();
         welcomeText.setText("Welcome to JavaFX Application!");
-        Normalizar = Normalizer.normalize(GuardarPalabra, Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
+        String Normalizar = Normalizer.normalize(GuardarPalabra, Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
         Normalizar = Normalizar.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Normalizer
-        System.out.println(Normalizar);
         return Normalizar;
     }
 }
