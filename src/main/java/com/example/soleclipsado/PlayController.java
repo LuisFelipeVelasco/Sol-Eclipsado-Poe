@@ -6,8 +6,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
 import java.net.PasswordAuthentication;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.Normalizer;
+import java.util.*;
 
 
 /*
@@ -64,9 +64,10 @@ public class PlayController {
     //controla/verifica las entradas de los campos de texto
     protected void ControladorCampoDeTexto(KeyEvent keyEvent){
         TextField textField=(TextField) keyEvent.getSource();
-        String Entrada=textField.getText();
+        String Entrada=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
+        Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Entrada
         if(ManejarIngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)){
-            VerificarEntradaCoincideEnPalabraSecreta(textField);
+            boolean ValorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);
         }
 
     }
@@ -79,8 +80,26 @@ public class PlayController {
         }
         return true;
     }
-    protected  void VerificarEntradaCoincideEnPalabraSecreta(TextField textField){
-        System.out.println(textField);
+    //Verifica que la entrada en un campo de texto coincida con la letra de la palabra secreta en esa posicion
+    protected  boolean VerificarEntradaCoincideEnPalabraSecreta(TextField textField,String Entrada){
+        List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
+        int PosicionCampodeTexto=textFields.indexOf(textField);
+        String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
+        if(Objects.equals(LetraCorrecta, Entrada)){
+            AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: green;");
+            AdvertenciaText.setText("Bien , le atinaste");
+            textField.setDisable(true); //Ya no se puede moficar el textField
+            return true;
+        }
+        else if (!LetraCorrecta.equalsIgnoreCase(Entrada) && !Entrada.isEmpty()){ //Si las letras no coinciden y es no vacio entonces retornar falso y dejar vacio el campo de texto
+            AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: red;");
+            AdvertenciaText.setText("Nope, la letra no coincide");
+            textField.setText("");
+            return false;
+        }
+        return true;
+
+
     }
 }
 
