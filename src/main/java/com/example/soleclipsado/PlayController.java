@@ -64,15 +64,30 @@ public class PlayController {
     //controla/verifica las entradas de los campos de texto
     protected void ControladorCampoDeTexto(KeyEvent keyEvent){
         ManejarIngresoDeUnCaracterEnCampoDeTexto((TextField) keyEvent.getSource());
+        ManejarIngresoDeSoloLetrasEnCampoDeTexto((TextField) keyEvent.getSource());
     }
 
+    //Evita que el usuario ingrese mas de un caracter a un campo de texto
     protected void ManejarIngresoDeUnCaracterEnCampoDeTexto(TextField textField){
-            String Texto=textField.getText();
-            if (Texto.length()>1){
-                textField.setText("");
+        String Texto=textField.getText();
+        if (Texto.length()>1){
                 AdvertenciaText.setText("Relax.. Solo 1 caracter por campo");
-            }
+                textField.setText("");
+
+        }
     }
+
+    //Evita que el usuario ingrese un caracter especial o un numero a un campo de texto
+    protected void ManejarIngresoDeSoloLetrasEnCampoDeTexto(TextField textField){
+        String Texto=textField.getText();
+        if (!Texto.matches("\\p{L}+") && !Texto.isEmpty()) {
+            AdvertenciaText.setText("Ojo..  nada de numeros o caracteres especiales");
+            textField.setText("");
+
+
+        }
+    }
+
 
 }
 
