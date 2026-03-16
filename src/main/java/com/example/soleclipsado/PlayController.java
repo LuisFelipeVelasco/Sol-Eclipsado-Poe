@@ -74,6 +74,7 @@ public class PlayController {
     //Evita que el usuario ingrese un caracter especial o un numero a un campo de texto
     protected boolean ManejarIngresoDeSoloLetrasEnCampoDeTexto(TextField textField,String Entrada){
         if (!Entrada.matches("\\p{L}+") && !Entrada.isEmpty()) {
+            AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: red;");
             AdvertenciaText.setText("Ojo..  nada de numeros o caracteres especiales");
             textField.setText("");
             return false;
