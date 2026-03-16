@@ -29,18 +29,25 @@ public class PlayController {
     }
 
     //Metodo para crear los campos de texto de acuerdo a la longitud de la palabra
-    public void CrearCamposdeTexto(){
+    protected void CrearCamposdeTexto(){
 
         Integer GuardarLongitudPalabraSecreta= PalabraSecreta.length();
         for(Integer i=0; i< GuardarLongitudPalabraSecreta; i++){
-            TextField textField= new TextField(); //Instancia un nuevo texfield
-            textField.setStyle( "-fx-font-size: 13; " + "-fx-font-family: 'Arial'; " + "-fx-font-weight: bold; " + //Estilo para textfield
-                            "-fx-alignment: center; "  + "-fx-border-color: #34495e; " + "-fx-border-width: 1; " + "-fx-border-radius: 2;" + "-fx-pref-height: 20;"
-            );
+            TextField textField = getTextField();
             textFields.add(textField); //Añade al objeto textField en la lista de textFields
             hbox.getChildren().add(textField); //Agrega el textField en el hbox
         }
 
+    }
+    //Retorna un textField con un estilo
+    protected TextField getTextField() {
+        TextField textField= new TextField(); //Instancia un nuevo texfield
+        textField.setStyle( "-fx-font-size: 20; " + "-fx-font-family: 'Arial'; " + "-fx-font-weight: bold; " + //Estilo para textfield
+                        "-fx-alignment: center; "  + "-fx-border-color: #34495e; " + "-fx-border-width: 1; " + "-fx-border-radius: 2;" + "-fx-pref-height: 20;"+"-fx-min-height: 40; " +
+                "-fx-max-height: 40; " +
+                "-fx-pref-height: 40; "
+        );
+        return textField;
     }
 
 
