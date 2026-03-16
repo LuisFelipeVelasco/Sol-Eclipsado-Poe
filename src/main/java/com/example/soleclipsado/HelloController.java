@@ -30,15 +30,16 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() throws IOException {
-        if (VerificarCaracteresEspeciales() && VerificarLongitudPalabra()){
+        if (VerificarCaracteresEspeciales() && VerificarLongitudPalabra()){ // Si el usuario escribe la palabra secreta correctamente entonces llama a playcontroller y le pasa la palabra
             String PalabraSecreta=ObtenerPalabraVerificada();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaAdivinarPalabra.fxml")); //Carga el archivo fxmLoader
             root=fxmlLoader.load(); // Carga los componentes de fxmLoader
             PlayController playController = fxmlLoader.getController(); // Crea una instancia del controlador de VistaAdivinarPalabra.fxml
-            playController.MostrarPalabraSecreta(PalabraSecreta);
+            playController.SetPalabraSecreta(PalabraSecreta);
+            playController.CrearCamposdeTexto();
             stage=(Stage)palabraField.getScene().getWindow(); //palabraField sabe en que escena vive
             scene=new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(scene); // Cambia la escena
             stage.show();
         };
     }
@@ -64,7 +65,6 @@ public class HelloController {
     }
     protected String ObtenerPalabraVerificada(){
         String GuardarPalabra=palabraField.getText();
-        welcomeText.setText("Welcome to JavaFX Application!");
         String Normalizar = Normalizer.normalize(GuardarPalabra, Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
         Normalizar = Normalizar.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Normalizer
         return Normalizar;

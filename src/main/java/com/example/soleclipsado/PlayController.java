@@ -1,5 +1,10 @@
 package com.example.soleclipsado;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /*
@@ -7,10 +12,33 @@ import javafx.fxml.FXML;
 @version 1.0.4
 
  */
+
+
 public class PlayController {
-    public void MostrarPalabraSecreta(String PalabraSecreta){
-        System.out.println(PalabraSecreta);
+    @FXML
+    private HBox hbox;
+    private String PalabraSecreta;
+    private List<TextField> textFields = new ArrayList<>();
+
+    //Metodo para establecer la palabra desde el controlador de inicio
+    public void SetPalabraSecreta(String Palabra){
+        PalabraSecreta=Palabra;
     }
+    //Metodo para crear los campos de texto de acuerdo a la longitud de la palabra
+    public void CrearCamposdeTexto(){
+
+        Integer GuardarLongitudPalabraSecreta= PalabraSecreta.length();
+        for(Integer i=0; i< GuardarLongitudPalabraSecreta; i++){
+            TextField textField= new TextField(); //Instancia un nuevo texfield
+            textField.setStyle( "-fx-font-size: 13; " + "-fx-font-family: 'Arial'; " + "-fx-font-weight: bold; " + //Estilo para textfield
+                            "-fx-alignment: center; "  + "-fx-border-color: #34495e; " + "-fx-border-width: 1; " + "-fx-border-radius: 2;" + "-fx-pref-height: 20;"
+            );
+            textFields.add(textField); //Añade al objeto textField en la lista de textFields
+            hbox.getChildren().add(textField); //Agrega el textField en el hbox
+        }
+
+    }
+
 
 }
 
