@@ -55,10 +55,11 @@ public class PlayController {
     //Le asigna a cada texfield el event listener setOnKeyTyped y hace que VerificarPalabra se encargue del evento
     protected void AsignarSetOnKeyTypedACamposDeTexto(){
         for (TextField textField : textFields){
-            textField.setOnKeyTyped(this::VerificarPalabra);
+            textField.setOnKeyTyped(this::ControladorCampoDeTexto);
         }
     }
-    protected void VerificarPalabra(KeyEvent keyEvent){
+    //controla/verifica las entradas de los campos de texto
+    protected void ControladorCampoDeTexto(KeyEvent keyEvent){
 
     }
 
