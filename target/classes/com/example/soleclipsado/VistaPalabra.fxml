@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="400.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.soleclipsado.HelloController">
+
+   <children>
+
+      <VBox alignment="TOP_CENTER" layoutX="3.0" layoutY="4.0" prefHeight="394.0" prefWidth="393.0" style="-fx-background-color: white;">
+
+         <children>
+
+            <ImageView fitHeight="100.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@IMAGENES/Sol_1.png" />
+               </image>
+            </ImageView>
+
+            <Label style="-fx-font-size: 20;" text="Escribe tu palabra secreta:">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Label>
+
+            <TextField fx:id="palabraField" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="225.0" style="-fx-font-size: 20; -fx-border-color: black; -fx-border-width: 2;">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </TextField>
+
+            <Label fx:id="welcomeText" style="-fx-text-fill: red; -fx-font-size: 15;">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
+
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHelloButtonClick" prefHeight="37.0" prefWidth="215.0" style="-fx-font-size: 18; -fx-background-color: EDCD81; -fx-border-width: 2;" text="JUGAR">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Button>
+
+         </children>
+
+         <padding>
+            <Insets bottom="20.0" top="20.0" />
+         </padding>
+
+      </VBox>
+
+   </children>
+
+</AnchorPane>

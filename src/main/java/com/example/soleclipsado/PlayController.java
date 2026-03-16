@@ -24,6 +24,24 @@ public class PlayController {
     private Label AdvertenciaText;
     private String PalabraSecreta;
     private List<TextField> textFields = new ArrayList<>();
+    int i=0;
+    @FXML
+    protected void onActionButtonClicked(){
+        int Contador=ContadorPista();
+        if (Contador<=3){
+            for(TextField tf : textFields){
+                if(tf.getText().isEmpty()){
+                    PistaAgregarLetra(tf);
+                    break;
+                }
+            }
+
+
+
+        }
+        System.out.println("Boton pista funcional");
+
+    }
 
 
     //Metodo que va a orquestar la interfaz de adivinar la palabra
@@ -102,6 +120,31 @@ public class PlayController {
 
 
     }
+
+    //Funcion para contar las veces que el usuario puede usar una pista
+    protected int ContadorPista(){
+
+        if(i<=3){
+            i+=1;
+            AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: green;");
+            AdvertenciaText.setText("numero de pistas restantes: "+(3-i)+" ");
+        }else{
+            AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: red;");
+            AdvertenciaText.setText("numero de pistas acabados");
+
+        }
+
+    return i;}
+    protected void PistaAgregarLetra(TextField textField){
+        List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
+        int PosicionCampodeTexto=textFields.indexOf(textField);
+        String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
+        textField.setText(LetraCorrecta);
+
+        System.out.println("Todo chido");
+
+    }
+
 }
 
 
