@@ -1,5 +1,6 @@
 package com.example.soleclipsado;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -19,6 +20,8 @@ import java.util.List;
 public class PlayController {
     @FXML
     private HBox hbox;
+    @FXML
+    private Label AdvertenciaText;
     private String PalabraSecreta;
     private List<TextField> textFields = new ArrayList<>();
 
@@ -60,7 +63,15 @@ public class PlayController {
     }
     //controla/verifica las entradas de los campos de texto
     protected void ControladorCampoDeTexto(KeyEvent keyEvent){
+        ManejarIngresoDeUnCaracterEnCampoDeTexto((TextField) keyEvent.getSource());
+    }
 
+    protected void ManejarIngresoDeUnCaracterEnCampoDeTexto(TextField textField){
+            String Texto=textField.getText();
+            if (Texto.length()>1){
+                textField.setText("");
+                AdvertenciaText.setText("Relax.. Solo 1 caracter por campo");
+            }
     }
 
 }
