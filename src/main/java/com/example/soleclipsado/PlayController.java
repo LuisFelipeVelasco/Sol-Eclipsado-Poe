@@ -47,7 +47,7 @@ public class PlayController {
     //Retorna un textField con un estilo
     protected TextField GetTextField() {
         TextField textField= new TextField(); //Instancia un nuevo texfield
-        textField.setStyle( "-fx-font-size: 20; " + "-fx-font-family: 'Arial'; " + "-fx-font-weight: bold; " + //Estilo para textfield
+        textField.setStyle( "-fx-font-size: 15; " + "-fx-font-family: 'Arial'; " + "-fx-font-weight: bold; " + //Estilo para textfield
                         "-fx-alignment: center; "  + "-fx-border-color: #34495e; " + "-fx-border-width: 1; " + "-fx-border-radius: 2;" +"-fx-min-height: 40; " +
                 "-fx-max-height: 40; " +
                 "-fx-pref-height: 40; "
