@@ -35,8 +35,7 @@ public class HelloController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaAdivinarPalabra.fxml")); //Carga el archivo fxmLoader
             root=fxmlLoader.load(); // Carga los componentes de fxmLoader
             PlayController playController = fxmlLoader.getController(); // Crea una instancia del controlador de VistaAdivinarPalabra.fxml
-            playController.SetPalabraSecreta(PalabraSecreta);
-            playController.CrearCamposdeTexto();
+            playController.AdivinarPalabra(PalabraSecreta);
             stage=(Stage)palabraField.getScene().getWindow(); //palabraField sabe en que escena vive
             scene=new Scene(root);
             stage.setScene(scene); // Cambia la escena

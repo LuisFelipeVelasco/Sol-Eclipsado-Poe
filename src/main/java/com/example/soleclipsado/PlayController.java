@@ -3,6 +3,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
+import java.net.PasswordAuthentication;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +21,13 @@ public class PlayController {
     private String PalabraSecreta;
     private List<TextField> textFields = new ArrayList<>();
 
-    //Metodo para establecer la palabra desde el controlador de inicio
-    public void SetPalabraSecreta(String Palabra){
+
+    //Metodo que va a orquestar la interfaz de adivinar la palabra
+    public void AdivinarPalabra(String Palabra) {
         PalabraSecreta=Palabra;
+        CrearCamposdeTexto();
     }
+
     //Metodo para crear los campos de texto de acuerdo a la longitud de la palabra
     public void CrearCamposdeTexto(){
 
