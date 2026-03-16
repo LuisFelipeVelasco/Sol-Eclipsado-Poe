@@ -43,7 +43,7 @@ public class HelloController {
             stage.show();
         };
     }
-    //revisa si la palabra guardada tiene entre 6 y 12 letras, caso contrario tira advertencia y reinicia la palabra en blanco
+    //Valida si la palabra guardada tiene entre 6 y 12 letras, caso contrario tira advertencia y reinicia la palabra en blanco
     protected boolean VerificarLongitudPalabra() {
         Integer GuardarLongitudPalabra = palabraField.getLength(); //guarda la longitud de la palabra escrita pór el usuario
         if (GuardarLongitudPalabra < 6 || GuardarLongitudPalabra > 12) {
@@ -53,7 +53,7 @@ public class HelloController {
         }
         return true;
     }
-    //revisa si la palabra tiene espacios o caracteres especiales, caso contrario tira una advertencia y reinicia la palabra a blanco
+    //Valida si la palabra tiene espacios o caracteres especiales, caso contrario tira una advertencia y reinicia la palabra a blanco
     protected  boolean VerificarCaracteresEspeciales(){
         String GuardarPalabra = palabraField.getText(); //guarda la palabra escrita pór el usuario
         if (!GuardarPalabra.matches("\\p{L}+")) {
@@ -63,6 +63,7 @@ public class HelloController {
         }
         return true;
     }
+    //Retorna la palabra escrita por el usuario en minusculas y sin tildes
     protected String ObtenerPalabraVerificada(){
         String GuardarPalabra=palabraField.getText();
         String Normalizar = Normalizer.normalize(GuardarPalabra, Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
