@@ -2,6 +2,8 @@ package com.example.soleclipsado;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
@@ -21,18 +23,23 @@ public class PlayController {
     @FXML
     private HBox hbox;
     @FXML
+    private ImageView imageSol;
+    @FXML
     private Label AdvertenciaText;
     private String PalabraSecreta;
     private List<TextField> textFields = new ArrayList<>();
     int i=0;
+    boolean valorDeIntento;
+    int c=1;
     @FXML
+    //Funcion que se activa cada vex que el boton pista es precionado
     protected void onActionButtonClicked(){
-        int Contador=ContadorPista();
+        int Contador=ContadorPista();// Este contador asegura que el boton no pueda ser usado mas de 3 veces
         if (Contador<=3){
-            for(TextField tf : textFields){
-                if(tf.getText().isEmpty()){
-                    PistaAgregarLetra(tf);
-                    break;
+            for(TextField tf : textFields){//Recorre toda la lista de textfields
+                if(tf.getText().isEmpty()){//encuentra el primer textfield vacio
+                    PistaAgregarLetra(tf);//llama a la funcion PistaAgregarLetra pasandole como parametro dicho textfield
+                    break;//detiene la funcion
                 }
             }
 
@@ -85,8 +92,11 @@ public class PlayController {
         String Entrada=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
         Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Entrada
         if(ManejarIngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)){
-            boolean ValorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);
-        }
+            valorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);//variable que guarda si el usuario se equivoco o no
+
+
+            CambiarSolEclipsado();}//funcion que cambia la imagen del sol en caso de quivocacion
+
 
     }
     //Evita que el usuario ingrese un caracter especial o un numero a un campo de texto
@@ -135,15 +145,48 @@ public class PlayController {
         }
 
     return i;}
+    //Funcion para qque cada vez que se unda el boton de pista se agregue la letra correspondiente en el campo en el cual se encuentre el usuario
     protected void PistaAgregarLetra(TextField textField){
         List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
-        int PosicionCampodeTexto=textFields.indexOf(textField);
-        String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
-        textField.setText(LetraCorrecta);
+
+        int PosicionCampodeTexto=textFields.indexOf(textField);//le asigna un numero que actua como su posicion a cada textfield creado
+        String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);////Esto le asigna un numero, a cada letra de la lista PalabraSecreta, de acuerdo con su posicion
+        textField.setText(LetraCorrecta);//Asigna al textField en el que se posicione el usuario la letra correcta
 
         System.out.println("Todo chido");
 
     }
+    //Funcion para cambair la imagen del sol en caso de que el usuario se equivoque
+    protected void CambiarSolEclipsado(){
+        if(valorDeIntento!=true){
+             c+=1;
+
+
+                imageSol.setImage(new Image(getClass().getResource("/com/example/soleclipsado/IMAGENES/Sol_"+c+".png").toExternalForm()));
+
+
+        }
+
+
+
+
+    }
+    /*
+    protected void CambiarSolEclipsado(KeyEvent keyEvent){
+        TextField textField=(TextField) keyEvent.getSource();
+        String Entrada=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
+        Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Entrada
+        if(ManejarIngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)){
+            boolean ValorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);
+            if (ValorDeIntento!=true){
+                imageSol.setImage(new Image(getClass().getResource("/com/example/soleclipsado/IMAGENES/Sol_2.png").toExternalForm()));
+
+            }
+        }
+
+
+    }
+     */
 
 }
 
