@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -21,12 +22,26 @@ public class FinalController {
 @FXML
     private Button buttonFinal;
     @FXML
+    private AnchorPane RootPane;
+    @FXML
     private Label TextoFinal;
     private Stage stage;
     private Scene scene;
     private Parent root;
     @FXML
-    protected void onHelloButtonClicked(){
+    protected void onHelloButtonClicked() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaPalabra.fxml"));
+        Parent root = fxmlLoader.load();
+        HelloController helloController=fxmlLoader.getController();
+
+
+
+        Stage stage = (Stage) RootPane.getScene().getWindow();
+
+        Scene scene = new Scene(root, 400, 400);
+        stage.setScene(scene);
+        stage.show();
+
 
     }
     public void cambiarLabelPerdedor(){

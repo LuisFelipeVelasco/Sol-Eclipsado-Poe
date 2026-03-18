@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.soleclipsado.FinalController">
+<AnchorPane fx:id="RootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.soleclipsado.FinalController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: white;">
          <children>
@@ -22,7 +22,7 @@
                   <Insets top="50.0" />
                </padding>
             </Label>
-            <Button fx:id="buttonFinal" mnemonicParsing="false" onAction="#onHelloButtonClicked" text="Button">
+            <Button fx:id="buttonFinal" mnemonicParsing="false" onAction="#onHelloButtonClicked" text="VOLVER AL INICIO">
                <VBox.margin>
                   <Insets top="125.0" />
                </VBox.margin>
