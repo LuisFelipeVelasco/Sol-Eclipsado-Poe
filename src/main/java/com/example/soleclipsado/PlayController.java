@@ -3,7 +3,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -13,9 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.net.PasswordAuthentication;
 import java.text.Normalizer;
 import java.util.*;
 
@@ -39,9 +36,11 @@ public class PlayController {
     private Label AdvertenciaText;
     private String PalabraSecreta;
     private List<TextField> textFields = new ArrayList<>();
-    int i=0;
+    int i=0;//contador para las pistas
     boolean valorDeIntento;
-    int c=1;
+    int c=1;// contador para el cambio de la imagen del sol eclipsado
+    int g=0;// contador para el numero de letras acertadas
+    int Exito;
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -105,8 +104,11 @@ public class PlayController {
         TextField textField=(TextField) keyEvent.getSource();
         String Entrada=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
         Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Entrada
+        JugadorGana(textField,Entrada);
+        GuardarGana(textField,Entrada);
         if(ManejarIngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)){
             valorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);//variable que guarda si el usuario se equivoco o no
+
 
 
             CambiarSolEclipsado();
@@ -189,12 +191,15 @@ public class PlayController {
 
 
     }
+    //Funcion que cambia a la pantalla final dependiendo si el jugador gana o pierde
     protected void CambiarVistaFinal() throws IOException {
         if(c==6){
 
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaFinal.fxml"));
             Parent root = fxmlLoader.load();
+            FinalController finalController=fxmlLoader.getController();
+            finalController.cambiarLabelPerdedor();
 
 
             Stage stage = (Stage) AnchorRoot.getScene().getWindow();
@@ -208,8 +213,45 @@ public class PlayController {
 
 
         }
+        if (c<6 && Exito!=0){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaFinal.fxml"));
+            Parent root = fxmlLoader.load();
+            FinalController finalController=fxmlLoader.getController();
+            finalController.cambiarLabelGanador();
+
+
+            Stage stage = (Stage) AnchorRoot.getScene().getWindow();
+
+            Scene scene = new Scene(root, 400, 400);
+            stage.setScene(scene);
+            stage.show();
+
+        }
 
     }
+    //funcion que guarda los aciertos del jugador
+    protected int JugadorGana(TextField textField, String Entrada){
+        List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
+        int PosicionCampodeTexto=textFields.indexOf(textField);
+        String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
+        if(Objects.equals(LetraCorrecta, Entrada)){
+            g+=1;
+            return g;
+        }
+
+
+    return g;}
+    //funcion que guarda el Exito del jugador en caso de que haya acertado todas las letras de la palabra secreta
+    protected int GuardarGana(TextField textField, String Entrada){
+        List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
+        int PosicionCampodeTexto=textFields.indexOf(textField);
+        String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
+        if (g==ListaLetrasPalabraSecreta.size()){ // si el contador g proveniente de la funcion JugadorGana es igual a la cantidad de letras en ListaLetrasPalabraSecreta, cambia el valor de Exito para que la funcion CambiarVistaFinal lo tome distinto de cero y arroje la vista ganador
+            Exito=g;
+            return Exito;
+
+        }
+    return Exito;}
 
 
 

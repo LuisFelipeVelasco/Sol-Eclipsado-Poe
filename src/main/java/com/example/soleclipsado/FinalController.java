@@ -20,12 +20,20 @@ import java.util.*;
 public class FinalController {
 @FXML
     private Button buttonFinal;
+    @FXML
+    private Label TextoFinal;
     private Stage stage;
     private Scene scene;
     private Parent root;
     @FXML
     protected void onHelloButtonClicked(){
 
+    }
+    public void cambiarLabelPerdedor(){
+        TextoFinal.setText("Intentos terminados,Perdiste");
+    }
+    public void cambiarLabelGanador(){
+        TextoFinal.setText("¡¡GANASTE!!");
     }
 
 
