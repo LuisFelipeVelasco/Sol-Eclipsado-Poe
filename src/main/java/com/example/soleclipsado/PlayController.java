@@ -174,6 +174,7 @@ public class PlayController {
         int PosicionCampodeTexto=textFields.indexOf(textField);//le asigna un numero que actua como su posicion a cada textfield creado
         String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);////Esto le asigna un numero, a cada letra de la lista PalabraSecreta, de acuerdo con su posicion
         textField.setText(LetraCorrecta);//Asigna al textField en el que se posicione el usuario la letra correcta
+        g+=1;
 
         System.out.println("Todo chido");
 
