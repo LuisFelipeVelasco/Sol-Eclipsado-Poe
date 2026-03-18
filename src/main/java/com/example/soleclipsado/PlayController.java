@@ -1,12 +1,20 @@
 package com.example.soleclipsado;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.net.PasswordAuthentication;
 import java.text.Normalizer;
 import java.util.*;
@@ -23,7 +31,10 @@ public class PlayController {
     @FXML
     private HBox hbox;
     @FXML
+    private AnchorPane AnchorRoot;
+    @FXML
     private ImageView imageSol;
+
     @FXML
     private Label AdvertenciaText;
     private String PalabraSecreta;
@@ -31,6 +42,9 @@ public class PlayController {
     int i=0;
     boolean valorDeIntento;
     int c=1;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     @FXML
     //Funcion que se activa cada vex que el boton pista es precionado
     protected void onActionButtonClicked(){
@@ -95,7 +109,13 @@ public class PlayController {
             valorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);//variable que guarda si el usuario se equivoco o no
 
 
-            CambiarSolEclipsado();}//funcion que cambia la imagen del sol en caso de quivocacion
+            CambiarSolEclipsado();
+            try {
+                CambiarVistaFinal();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }//funcion que cambia la imagen del sol en caso de quivocacion
 
 
     }
@@ -158,7 +178,7 @@ public class PlayController {
     }
     //Funcion para cambair la imagen del sol en caso de que el usuario se equivoque
     protected void CambiarSolEclipsado(){
-        if(valorDeIntento!=true){
+        if(valorDeIntento!=true && c<=5){
              c+=1;
 
 
@@ -168,25 +188,30 @@ public class PlayController {
         }
 
 
-
-
     }
-    /*
-    protected void CambiarSolEclipsado(KeyEvent keyEvent){
-        TextField textField=(TextField) keyEvent.getSource();
-        String Entrada=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
-        Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Entrada
-        if(ManejarIngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)){
-            boolean ValorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);
-            if (ValorDeIntento!=true){
-                imageSol.setImage(new Image(getClass().getResource("/com/example/soleclipsado/IMAGENES/Sol_2.png").toExternalForm()));
+    protected void CambiarVistaFinal() throws IOException {
+        if(c==6){
 
-            }
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaFinal.fxml"));
+            Parent root = fxmlLoader.load();
+
+
+            Stage stage = (Stage) AnchorRoot.getScene().getWindow();
+
+            Scene scene = new Scene(root, 400, 400);
+            stage.setScene(scene);
+            stage.show();
+
+
+
+
+
         }
 
-
     }
-     */
+
+
 
 }
 
