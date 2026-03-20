@@ -40,7 +40,7 @@ public class PlayController {
     boolean valorDeIntento;
     int ContadorEstadoImagenSolEclipsado=1;
     int ContadorLetrasAcertadas=0;
-    int Exito;
+    boolean JugadorAcertoTodasLasLetras=false;
 
 
     @FXML
@@ -178,23 +178,18 @@ public class PlayController {
     //Funcion que cambia a la pantalla final dependiendo si el jugador gana o pierde
     protected void CambiarVistaFinal() throws IOException {
 
-        if(ContadorEstadoImagenSolEclipsado==6){
+        boolean JugadorPierde = (ContadorEstadoImagenSolEclipsado==6);
+        boolean JugadorGana = (ContadorEstadoImagenSolEclipsado<6 && JugadorAcertoTodasLasLetras==true);
+
+        if(JugadorPierde || JugadorGana){
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaFinal.fxml"));
             Parent root = fxmlLoader.load();
             FinalController finalController=fxmlLoader.getController();
-            finalController.cambiarLabelPerdedor();
-            Stage stage = (Stage) AnchorRoot.getScene().getWindow();
-            Scene scene = new Scene(root, 400, 400);
-            stage.setScene(scene);
-            stage.show();
-        }
 
-        if (ContadorEstadoImagenSolEclipsado<6 && Exito!=0){
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaFinal.fxml"));
-            Parent root = fxmlLoader.load();
-            FinalController finalController=fxmlLoader.getController();
-            finalController.cambiarLabelGanador();
+            if(JugadorPierde) finalController.cambiarLabelPerdedor();
+            else  finalController.cambiarLabelGanador();
+
             Stage stage = (Stage) AnchorRoot.getScene().getWindow();
             Scene scene = new Scene(root, 400, 400);
             stage.setScene(scene);
@@ -212,14 +207,14 @@ public class PlayController {
         return ContadorLetrasAcertadas;}
 
     //funcion que guarda el Exito del jugador en caso de que haya acertado todas las letras de la palabra secreta
-    protected int GuardarGana(TextField textField, String Entrada){
+    protected boolean GuardarGana(TextField textField, String Entrada){
 
         List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
         if (ContadorLetrasAcertadas==ListaLetrasPalabraSecreta.size()){ // si el ContadorLetrasAcertadas proveniente de la funcion JugadorGana es igual a la cantidad de letras en ListaLetrasPalabraSecreta, cambia el valor de Exito para que la funcion CambiarVistaFinal lo tome distinto de cero y arroje la vista ganador
-            Exito=ContadorLetrasAcertadas;
-            return Exito;
+            JugadorAcertoTodasLasLetras=true;
+            return JugadorAcertoTodasLasLetras;
         }
-        return Exito;}
+        return JugadorAcertoTodasLasLetras;}
 
     protected String LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(TextField textField){
         List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
