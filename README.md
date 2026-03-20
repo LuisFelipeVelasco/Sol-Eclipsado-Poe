@@ -2,8 +2,6 @@
 
 **Sol Eclipsado** es un juego interactivo desarrollado en **Java con JavaFX**. El objetivo principal es adivinar una palabra oculta; sin embargo, por cada intento incorrecto, un sol en la pantalla se irá eclipsando progresivamente a través de una secuencia de imágenes. ¡Adivina la palabra antes de que el eclipse sea total!
 
-Enlace al repositorio: [Sol-Eclipsado-Poe](https://github.com/LuisFelipeVelasco/Sol-Eclipsado-Poe)
-
 ---
 
 ## 🚀 Características Principales
