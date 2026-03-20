@@ -41,14 +41,14 @@ public class PlayController {
     boolean valorDeIntento;
     int ContadorEstadoImagenSolEclipsado=1;
     int ContadorLetrasAcertadas=0;
-    int NumeroMarximoPistasDadas=3;
+    int NumeroMaximoPistasDadas=3;
 
 
     @FXML
     //Funcion que se activa cada vex que el boton pista es precionado
     protected void onActionButtonClicked(){
         SumarContadorPistaDada();
-        if (ContadorPistasDadas<=NumeroMarximoPistasDadas){
+        if (ContadorPistasDadas<=NumeroMaximoPistasDadas){
             for(TextField textField : textFields){//Recorre toda la lista de textfields
                 if(textField.getText().isEmpty()){//encuentra el primer textfield vacio
                     PistaAgregarLetra(textField);//llama a la funcion PistaAgregarLetra pasandole como parametro dicho textfield
@@ -146,9 +146,9 @@ public class PlayController {
     //Funcion para contar las veces que el usuario puede usar una pista
     protected void SumarContadorPistaDada(){
 
-        if(ContadorPistasDadas<=3){
+        if(ContadorPistasDadas<=NumeroMaximoPistasDadas){
             ContadorPistasDadas+=1;
-            DiseñoLabelText(AdvertenciaText,"Numero de pistas restantes:" + ((3-ContadorPistasDadas)+""),"green" );
+            DiseñoLabelText(AdvertenciaText,"Numero de pistas restantes:" + ((NumeroMaximoPistasDadas-ContadorPistasDadas)+""),"green" );
         }else{
             DiseñoLabelText(AdvertenciaText,"No puedes usar mas pistas","red" );
         }
