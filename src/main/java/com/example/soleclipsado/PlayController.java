@@ -100,7 +100,6 @@ public class PlayController {
         TextField textField=(TextField) keyEvent.getSource();
         String Entrada=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
         Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Entrada
-        JugadorGana(textField,Entrada);
         GuardarGana(textField,Entrada);
         if(IngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)==true){
             valorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);//variable que guarda si el usuario se equivoco o no
@@ -132,6 +131,7 @@ public class PlayController {
             AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: green;");
             AdvertenciaText.setText("Bien , le atinaste");
             textField.setDisable(true); //Ya no se puede moficar el textField
+            ContadorLetrasAcertadas+=1;
             return true;
         }
         else if (!LetraCorrecta.equalsIgnoreCase(Entrada) && !Entrada.isEmpty()){ //Si las letras no coinciden y es no vacio entonces retornar falso y dejar vacio el campo de texto
@@ -167,7 +167,6 @@ public class PlayController {
     }
     //Funcion para cambair la imagen del sol en caso de que el usuario se equivoque
     protected void CambiarSolEclipsado(){
-
         if(valorDeIntento!=true && ContadorEstadoImagenSolEclipsado<=5){
              ContadorEstadoImagenSolEclipsado+=1;
                 imageSol.setImage(new Image(getClass().getResource(
@@ -196,15 +195,6 @@ public class PlayController {
             stage.show();
         }
     }
-
-    //funcion que guarda los aciertos del jugador
-    protected int JugadorGana(TextField textField, String Entrada){
-        String LetraCorrecta= LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(textField);
-        if(Objects.equals(LetraCorrecta, Entrada)){
-            ContadorLetrasAcertadas+=1;
-            return ContadorLetrasAcertadas;
-        }
-        return ContadorLetrasAcertadas;}
 
     //funcion que guarda el Exito del jugador en caso de que haya acertado todas las letras de la palabra secreta
     protected boolean GuardarGana(TextField textField, String Entrada){
