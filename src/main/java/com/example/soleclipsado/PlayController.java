@@ -102,7 +102,7 @@ public class PlayController {
         Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Entrada
         JugadorGana(textField,Entrada);
         GuardarGana(textField,Entrada);
-        if(ManejarIngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)){
+        if(IngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)==true){
             valorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);//variable que guarda si el usuario se equivoco o no
             CambiarSolEclipsado();
             try {
@@ -114,7 +114,7 @@ public class PlayController {
     }
 
     //Evita que el usuario ingrese un caracter especial o un numero a un campo de texto
-    protected boolean ManejarIngresoDeSoloLetrasEnCampoDeTexto(TextField textField,String Entrada){
+    protected boolean IngresoDeSoloLetrasEnCampoDeTexto(TextField textField,String Entrada){
 
         if (!Entrada.matches("\\p{L}+") && !Entrada.isEmpty()) {
             AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: red;");
