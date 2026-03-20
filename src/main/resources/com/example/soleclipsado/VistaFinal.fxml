@@ -9,81 +9,50 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="RootPane"
-   maxHeight="-Infinity" maxWidth="-Infinity"
-   minHeight="-Infinity" minWidth="-Infinity"
-   prefHeight="400.0" prefWidth="400.0"
-   style="-fx-background-color: linear-gradient(to bottom, #1a1a2e, #16213e, #0f3460);"
-   xmlns="http://javafx.com/javafx/25"
-   xmlns:fx="http://javafx.com/fxml/1"
-   fx:controller="com.example.soleclipsado.FinalController">
+<AnchorPane fx:id="RootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to bottom, #1a1a2e, #16213e, #0f3460);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.soleclipsado.FinalController">
 
    <children>
 
-      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="400.0"
-         style="-fx-background-color: transparent;">
+      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: transparent;">
 
          <children>
 
             <!-- Imagen final del Sol: grande, con halo más intenso que indica conclusión -->
-            <ImageView fitHeight="136.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="144.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@IMAGENES/Sol_6.png" />
                </image>
                <effect>
                   <!-- Halo más vibrante: señal de fin de partida (Gestalt: cierre) -->
-                  <DropShadow color="#F5A623" radius="35.0" spread="0.15" offsetX="0" offsetY="0"/>
+                  <DropShadow color="#F5A623" offsetX="0" offsetY="0" radius="35.0" spread="0.15" />
                </effect>
                <VBox.margin>
-                  <Insets top="20.0" right="10.0" />
+                  <Insets right="10.0" top="20.0" />
                </VBox.margin>
             </ImageView>
+            <Label style="-fx-font-size: 13; -fx-font-family: 'Georgia'; -fx-text-fill: #EDCD81;                       -fx-font-style: italic; -fx-opacity: 0.75; -fx-letter-spacing: 3;" text="Sol Eclipsado" />
 
             <!-- Separador decorativo sutil -->
-            <Label text="— ✦ —"
-               style="-fx-font-size: 14; -fx-text-fill: #EDCD81; -fx-opacity: 0.5;">
+            <Label style="-fx-font-size: 14; -fx-text-fill: #EDCD81; -fx-opacity: 0.5;" text="— ✦ —">
                <VBox.margin>
                   <Insets top="12.0" />
                </VBox.margin>
             </Label>
 
             <!-- Texto final: dinámico vía controller, tipografía grande y legible -->
-            <Label fx:id="TextoFinal"
-               alignment="CENTER"
-               prefHeight="55.0" prefWidth="370.0"
-               textAlignment="CENTER"
-               wrapText="true"
-               style="-fx-font-size: 24;
-                      -fx-font-family: 'Georgia';
-                      -fx-font-weight: bold;
-                      -fx-text-fill: #F0E6D3;
-                      -fx-letter-spacing: 1;">
+            <Label fx:id="TextoFinal" alignment="CENTER" prefHeight="55.0" prefWidth="370.0" style="-fx-font-size: 24;                       -fx-font-family: 'Georgia';                       -fx-font-weight: bold;                       -fx-text-fill: #F0E6D3;                       -fx-letter-spacing: 1;" textAlignment="CENTER" wrapText="true">
                <padding>
                   <Insets top="6.0" />
                </padding>
                <VBox.margin>
-                  <Insets top="38.0" left="15.0" right="15.0" />
+                  <Insets bottom="25.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </Label>
 
             <!-- Botón de regreso: Von Restorff — único CTA, máximo contraste, invita a jugar de nuevo -->
-            <Button fx:id="buttonFinal"
-               maxHeight="-Infinity" maxWidth="-Infinity"
-               minHeight="-Infinity" minWidth="-Infinity"
-               mnemonicParsing="false" onAction="#onHelloButtonClicked"
-               prefHeight="44.0" prefWidth="220.0"
-               text="↩  Vuelve al inicio"
-               style="-fx-font-size: 16;
-                      -fx-font-family: 'Georgia';
-                      -fx-font-weight: bold;
-                      -fx-background-color: linear-gradient(to right, #EDCD81, #F5A623);
-                      -fx-text-fill: #1a1a2e;
-                      -fx-border-width: 0;
-                      -fx-background-radius: 22;
-                      -fx-cursor: hand;
-                      -fx-effect: dropshadow(gaussian, rgba(237,205,129,0.6), 18, 0.3, 0, 4);">
+            <Button fx:id="buttonFinal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHelloButtonClicked" prefHeight="44.0" prefWidth="220.0" style="-fx-font-size: 16;                       -fx-font-family: 'Georgia';                       -fx-font-weight: bold;                       -fx-background-color: linear-gradient(to right, #EDCD81, #F5A623);                       -fx-text-fill: #1a1a2e;                       -fx-border-width: 0;                       -fx-background-radius: 22;                       -fx-cursor: hand;                       -fx-effect: dropshadow(gaussian, rgba(237,205,129,0.6), 18, 0.3, 0, 4);" text="↩  Vuelve al inicio">
                <VBox.margin>
-                  <Insets top="55.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
             </Button>
 
