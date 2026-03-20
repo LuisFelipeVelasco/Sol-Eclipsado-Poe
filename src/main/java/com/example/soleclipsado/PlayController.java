@@ -45,18 +45,24 @@ public class PlayController {
 
 
     @FXML
-    //Funcion que se activa cada vex que el boton pista es precionado
+    //Funcion que se activa cada vex que el boton pista es precionado y verifica si dar o no una pista
     protected void onActionButtonClicked(){
-        SumarContadorPistaDada();
-        if (ContadorPistasDadas<=NumeroMaximoPistasDadas){
+        if (ContadorPistasDadas<NumeroMaximoPistasDadas){ //Debe ser menor para no dar mas pistas que el numero maximo
+            ContadorPistasDadas+=1;
+            DiseñoLabelText(AdvertenciaText,"Numero de pistas restantes:" + ((NumeroMaximoPistasDadas-ContadorPistasDadas)+""),"green" );
             for(TextField textField : textFields){//Recorre toda la lista de textfields
                 if(textField.getText().isEmpty()){//encuentra el primer textfield vacio
                     PistaAgregarLetra(textField);//llama a la funcion PistaAgregarLetra pasandole como parametro dicho textfield
                     break;//detiene la funcion
                 }
             }
+            try {
+                CambiarVistaFinal();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        System.out.println("Boton pista funcional");
+        else DiseñoLabelText(AdvertenciaText,"No puedes usar mas pistas","red" );
     }
 
     //Metodo que va a orquestar la interfaz de adivinar la palabra
@@ -142,26 +148,11 @@ public class PlayController {
         return true;
     }
 
-
-    //Funcion para contar las veces que el usuario puede usar una pista
-    protected void SumarContadorPistaDada(){
-
-        if(ContadorPistasDadas<=NumeroMaximoPistasDadas){
-            ContadorPistasDadas+=1;
-            DiseñoLabelText(AdvertenciaText,"Numero de pistas restantes:" + ((NumeroMaximoPistasDadas-ContadorPistasDadas)+""),"green" );
-        }else{
-            DiseñoLabelText(AdvertenciaText,"No puedes usar mas pistas","red" );
-        }
-    }
-
     //Funcion para qque cada vez que se unda el boton de pista se agregue la letra correspondiente en el campo en el cual se encuentre el usuario
     protected void PistaAgregarLetra(TextField textField){
         String LetraPalabraSecreta=LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(textField);
         textField.setText(LetraPalabraSecreta);//Asigna al textField en el que se posicione el usuario la letra correcta
         ContadorLetrasAcertadas+=1;
-
-        System.out.println("Todo chido");
-
     }
     //Funcion para cambair la imagen del sol en caso de que el usuario se equivoque
     protected void CambiarSolEclipsado(){
