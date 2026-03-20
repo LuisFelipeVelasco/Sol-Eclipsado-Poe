@@ -34,10 +34,10 @@ public class FinalController {
         stage.show();
     }
     public void cambiarLabelPerdedor(){
-        TextoFinal.setText("Intentos terminados,Perdiste");
+        TextoFinal.setText("Intentos terminados\n"+"Perdiste");
     }
     public void cambiarLabelGanador(){
-        TextoFinal.setText("¡¡GANASTE!!");
+        TextoFinal.setText("Felicitaciones\n" +"Adivinaste la palabra");
     }
 
 }

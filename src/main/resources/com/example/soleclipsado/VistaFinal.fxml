@@ -30,7 +30,6 @@
                   <Insets right="10.0" top="20.0" />
                </VBox.margin>
             </ImageView>
-            <Label style="-fx-font-size: 13; -fx-font-family: 'Georgia'; -fx-text-fill: #EDCD81;                       -fx-font-style: italic; -fx-opacity: 0.75; -fx-letter-spacing: 3;" text="Sol Eclipsado" />
 
             <!-- Separador decorativo sutil -->
             <Label style="-fx-font-size: 14; -fx-text-fill: #EDCD81; -fx-opacity: 0.5;" text="— ✦ —">
@@ -40,19 +39,19 @@
             </Label>
 
             <!-- Texto final: dinámico vía controller, tipografía grande y legible -->
-            <Label fx:id="TextoFinal" alignment="CENTER" prefHeight="55.0" prefWidth="370.0" style="-fx-font-size: 24;                       -fx-font-family: 'Georgia';                       -fx-font-weight: bold;                       -fx-text-fill: #F0E6D3;                       -fx-letter-spacing: 1;" textAlignment="CENTER" wrapText="true">
+            <Label fx:id="TextoFinal" alignment="CENTER" prefHeight="81.0" prefWidth="370.0" style="-fx-font-size: 24;                       -fx-font-family: 'Georgia';                       -fx-font-weight: bold;                       -fx-text-fill: #F0E6D3;                       -fx-letter-spacing: 1;" textAlignment="CENTER" wrapText="true">
                <padding>
                   <Insets top="6.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="25.0" left="15.0" right="15.0" top="15.0" />
+                  <Insets bottom="25.0" left="15.0" right="15.0" top="5.0" />
                </VBox.margin>
             </Label>
 
             <!-- Botón de regreso: Von Restorff — único CTA, máximo contraste, invita a jugar de nuevo -->
-            <Button fx:id="buttonFinal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHelloButtonClicked" prefHeight="44.0" prefWidth="220.0" style="-fx-font-size: 16;                       -fx-font-family: 'Georgia';                       -fx-font-weight: bold;                       -fx-background-color: linear-gradient(to right, #EDCD81, #F5A623);                       -fx-text-fill: #1a1a2e;                       -fx-border-width: 0;                       -fx-background-radius: 22;                       -fx-cursor: hand;                       -fx-effect: dropshadow(gaussian, rgba(237,205,129,0.6), 18, 0.3, 0, 4);" text="↩  Vuelve al inicio">
+            <Button fx:id="buttonFinal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHelloButtonClicked" prefHeight="44.0" prefWidth="220.0" style="-fx-font-size: 16;                       -fx-font-family: 'Georgia';                       -fx-font-weight: bold;                       -fx-background-color: linear-gradient(to right, #EDCD81, #F5A623);                       -fx-text-fill: #1a1a2e;                       -fx-border-width: 0;                       -fx-background-radius: 22;                       -fx-cursor: hand;                       -fx-effect: dropshadow(gaussian, rgba(237,205,129,0.6), 18, 0.3, 0, 4);" text="↩  Vuelve a jugar">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="5.0" />
                </VBox.margin>
             </Button>
 
