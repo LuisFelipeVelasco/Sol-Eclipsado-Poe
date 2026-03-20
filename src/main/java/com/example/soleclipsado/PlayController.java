@@ -23,8 +23,6 @@ import java.util.function.ToIntFunction;
 @version 1.0.4
 
  */
-
-
 public class PlayController {
     @FXML
     private HBox hbox;
@@ -45,18 +43,18 @@ public class PlayController {
 
 
     @FXML
-    //Funcion que se activa cada vex que el boton pista es precionado y verifica si dar o no una pista
+    //Metodo que se activa cada vex que el boton pista es precionado y verifica si dar o no una pista
     protected void onActionButtonClicked(){
         if (ContadorPistasDadas<NumeroMaximoPistasDadas){ //Debe ser menor para no dar mas pistas que el numero maximo
             ContadorPistasDadas+=1;
             DiseñoLabelText(AdvertenciaText,"Numero de pistas restantes:" + ((NumeroMaximoPistasDadas-ContadorPistasDadas)+""),"green" );
             for(TextField textField : textFields){//Recorre toda la lista de textfields
                 if(textField.getText().isEmpty()){//encuentra el primer textfield vacio
-                    PistaAgregarLetra(textField);//llama a la funcion PistaAgregarLetra pasandole como parametro dicho textfield
-                    break;//detiene la funcion
+                    PistaAgregarLetra(textField);//llama al Metodo PistaAgregarLetra pasandole como parametro dicho textfield
+                    break;//detiene el bucle
                 }
             }
-            //Si usando una pista se completa la palabra mostrar pantalla de victoria
+            //Si usando una pista se completa la palabra, entonces mostrar la pantalla de victoria
             try {
                 CambiarVistaFinal();
             } catch (IOException e) {
@@ -76,7 +74,7 @@ public class PlayController {
             hbox.getChildren().add(textField); //Agrega el campo de texto en el hbox
         }
     }
-    //Retorna un textField con un estilo
+    //Metodo que retorna un textField con un estilo
     protected TextField GetTextField() {
 
         TextField textField= new TextField(); //Instancia un nuevo texfield
@@ -88,19 +86,27 @@ public class PlayController {
         return textField;
     }
 
-    //Le asigna a cada texfield el event listener setOnKeyTyped y hace que ControladorCampoDeTexto se encargue del evento
+    //Metodo que le asigna a cada texfield el event listener setOnKeyTyped y hace que ControladorCampoDeTexto se encargue del evento
     protected void AsignarSetOnKeyTypedACamposDeTexto(){
 
         for (TextField textField : textFields){
             textField.setOnKeyTyped(this::ControladorCampoDeTexto);
         }
     }
-    //controla/verifica las entradas de los campos de texto
+    //Metodo que controla/verifica las entradas de los campos de texto
     protected void ControladorCampoDeTexto(KeyEvent keyEvent){
 
         TextField textField=(TextField) keyEvent.getSource();
-        String Entrada=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
-        Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Entrada
+
+        /* * replaceAll("\\p{M}", "") y toLowerCase(Locale.ROOT) limpian y estandarizan el texto:
+         * \\p{M} -> Busca "Marks" (Marcas combinadas), que son los acentos/diéresis sueltos que dejó el NFD.
+         * "" -> Reemplaza esos acentos por nada (los elimina por completo).
+         * toLowerCase() -> Convierte toda la palabra a minúsculas.
+         * Locale.ROOT -> Asegura que la conversión a minúsculas sea universal y no dependa del idioma del sistema.
+         */
+
+        String Entrada=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);
+        Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT);
         if(IngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)==true){
             valorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);//variable que guarda si el usuario se equivoco o no
             CambiarSolEclipsado();
@@ -112,7 +118,7 @@ public class PlayController {
         }
     }
 
-    //Evita que el usuario ingrese un caracter especial o un numero a un campo de texto
+    //Metodo que Evita que el usuario ingrese un caracter especial o un numero a un campo de texto
     protected boolean IngresoDeSoloLetrasEnCampoDeTexto(TextField textField,String Entrada){
 
         if (!Entrada.matches("\\p{L}+") && !Entrada.isEmpty()) {
@@ -124,7 +130,7 @@ public class PlayController {
         return true;
     }
 
-    //Verifica que la entrada en un campo de texto coincida con la letra de la palabra secreta en esa posicion
+    //Metodo que verifica que la entrada en un campo de texto coincida con la letra de la palabra secreta en esa posicion
     protected  boolean VerificarEntradaCoincideEnPalabraSecreta(TextField textField,String Entrada){
 
         String LetraCorrecta= LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(textField);
@@ -142,13 +148,13 @@ public class PlayController {
         return true;
     }
 
-    //Funcion para qque cada vez que se unda el boton de pista se agregue la letra correspondiente en el campo en el cual se encuentre el usuario
+    //Metodo para que cada vez que se presione el boton de pista se agregue la letra correspondiente en el campo en el cual se encuentre el usuario
     protected void PistaAgregarLetra(TextField textField){
         String LetraPalabraSecreta=LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(textField);
         textField.setText(LetraPalabraSecreta);//Asigna al textField en el que se posicione el usuario la letra correcta
         ContadorLetrasAcertadas+=1;
     }
-    //Funcion para cambair la imagen del sol en caso de que el usuario se equivoque
+    //Metodo para cambiar la imagen del sol en caso de que el usuario se equivoque
     protected void CambiarSolEclipsado(){
         if(valorDeIntento!=true && ContadorEstadoImagenSolEclipsado<=5){
              ContadorEstadoImagenSolEclipsado+=1;
@@ -157,7 +163,7 @@ public class PlayController {
         }
     }
 
-    //Funcion que cambia a la pantalla final dependiendo si el jugador gana o pierde
+    //Metodo que cambia a la pantalla final dependiendo si el jugador gana o pierde
     protected void CambiarVistaFinal() throws IOException {
 
         boolean JugadorPierde = (ContadorEstadoImagenSolEclipsado==6);
@@ -179,7 +185,7 @@ public class PlayController {
         }
     }
 
-    //funcion que guarda el Exito del jugador en caso de que haya acertado todas las letras de la palabra secreta
+    //Metodo que retorna el valor de verdad de la igualdad entre la cantidad de letras que acerto el usuario y el numero de caracteres de la palabra secreta
     protected boolean ValidarJugadorAcertoTodasLasLetras() {
 
         List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
@@ -192,7 +198,7 @@ public class PlayController {
         return ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
     }
 
-    //Le cambia el diseño a un label , dandole un mensaje y un color
+    //Metodo que cambia el diseño a un label , dandole un mensaje y un color
     protected void  DiseñoLabelText(Label label,String Mensaje,String Color){
         label.setStyle(label.getStyle() + "-fx-text-fill:"+Color+";");
         label.setText(Mensaje);

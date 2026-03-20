@@ -59,6 +59,15 @@ public class HelloController {
     //Valida si la palabra tiene espacios o caracteres especiales, caso contrario tira una advertencia y reinicia la palabra a blanco
     protected  boolean VerificarCaracteresEspeciales(){
         String GuardarPalabra = palabraField.getText(); //guarda la palabra escrita pór el usuario
+
+        /* * Uso de .matches("\\p{L}+") para validar una palabra:
+         * * .matches() -> Evalúa estrictamente que TODO el texto, de principio a fin, cumpla la regla.
+         * \\ -> Doble barra para que Java envíe una sola '\' al motor de Regex.
+         * p  -> Propiedad (Property) de Unicode.
+         * L  -> Letra (Letter), lo que incluye tildes, la 'ñ', etc. (Rechaza espacios y números).
+         * +  -> Cuantificador "uno o más". Obliga a leer la palabra completa, no solo una letra suelta.
+         */
+
         if (!GuardarPalabra.matches("\\p{L}+")) {
             welcomeText.setText("La palabra no puede tener espacios ni caracteres especiales");
             palabraField.setText("");
@@ -69,8 +78,20 @@ public class HelloController {
     //Retorna la palabra escrita por el usuario en minusculas y sin tildes
     protected String ObtenerPalabraVerificada(){
         String GuardarPalabra=palabraField.getText();
-        String Normalizar = Normalizer.normalize(GuardarPalabra, Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
-        Normalizar = Normalizar.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Normalizer
+        /* *
+        * Normalizer.normalize -> Transforma el texto a un formato estándar de Unicode.
+        * Normalizer (Form.NFD) separa las letras de sus tildes o diéresis (ej. 'á' -> 'a' + '´')
+        */
+        String Normalizar = Normalizer.normalize(GuardarPalabra, Normalizer.Form.NFD);
+
+        /* * replaceAll("\\p{M}", "") y toLowerCase(Locale.ROOT) limpian y estandarizan el texto:
+         * \\p{M} -> Busca "Marks" (Marcas combinadas), que son los acentos/diéresis sueltos que dejó el NFD.
+         * "" -> Reemplaza esos acentos por nada (los elimina por completo).
+         * toLowerCase() -> Convierte toda la palabra a minúsculas.
+         * Locale.ROOT -> Asegura que la conversión a minúsculas sea universal y no dependa del idioma del sistema.
+         */
+
+        Normalizar = Normalizar.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT);
         return Normalizar;
     }
 }
