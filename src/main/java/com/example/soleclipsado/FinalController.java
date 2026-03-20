@@ -25,6 +25,8 @@ public class FinalController {
     @FXML
     private Label TextoFinal;
     @FXML
+    private ImageView imageSol;
+    @FXML
     protected void onHelloButtonClicked() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaPalabra.fxml"));
         Parent root = fxmlLoader.load();
@@ -38,6 +40,10 @@ public class FinalController {
     }
     public void cambiarLabelGanador(){
         TextoFinal.setText("Felicitaciones\n" +"Adivinaste la palabra");
+    }
+    public void setImageSol(int EstadoSolEclipaso){
+        imageSol.setImage(new Image(getClass().getResource(
+                "/com/example/soleclipsado/IMAGENES/Sol_"+EstadoSolEclipaso+".png").toExternalForm()));
     }
 
 }

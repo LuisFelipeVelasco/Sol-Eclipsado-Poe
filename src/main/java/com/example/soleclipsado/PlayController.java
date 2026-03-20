@@ -153,8 +153,9 @@ public class PlayController {
         ContadorLetrasAcertadas+=1;
     }
     //Metodo para cambiar la imagen del sol en caso de que el usuario se equivoque
+    //.toExternalForm convierte la URL a texto
     protected void CambiarSolEclipsado(){
-        if(valorDeIntento!=true && ContadorEstadoImagenSolEclipsado<=5){
+        if(!valorDeIntento && ContadorEstadoImagenSolEclipsado<=5){
              ContadorEstadoImagenSolEclipsado+=1;
                 imageSol.setImage(new Image(getClass().getResource(
                         "/com/example/soleclipsado/IMAGENES/Sol_"+ContadorEstadoImagenSolEclipsado+".png").toExternalForm()));
@@ -173,6 +174,7 @@ public class PlayController {
             Parent root = fxmlLoader.load();
             FinalController finalController=fxmlLoader.getController();
 
+            finalController.setImageSol(ContadorEstadoImagenSolEclipsado);
             if(JugadorPierde) finalController.cambiarLabelPerdedor();
             else  finalController.cambiarLabelGanador();
 

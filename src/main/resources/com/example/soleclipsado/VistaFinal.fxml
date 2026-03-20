@@ -18,7 +18,7 @@
          <children>
 
             <!-- Imagen final del Sol: grande, con halo más intenso que indica conclusión -->
-            <ImageView fitHeight="144.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageSol" fitHeight="144.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@IMAGENES/Sol_6.png" />
                </image>
