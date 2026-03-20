@@ -102,9 +102,10 @@ public class PlayController {
          * toLowerCase() -> Convierte toda la palabra a minúsculas.
          * Locale.ROOT -> Asegura que la conversión a minúsculas sea universal y no dependa del idioma del sistema.
          */
-
+        System.out.println(keyEvent.getCharacter());
         String LetraIngresadaUsuario=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);
         LetraIngresadaUsuario = LetraIngresadaUsuario.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT);
+        System.out.println(LetraIngresadaUsuario);
         if(IngresoDeSoloLetrasEnCampoDeTexto(textField, LetraIngresadaUsuario)){
             valorDeIntento=VerificarLetraIngresadaUsuarioCoincideEnPalabraSecreta(textField,LetraIngresadaUsuario);//variable que guarda si el usuario se equivoco o no
             CambiarSolEclipsado();
