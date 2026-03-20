@@ -35,7 +35,7 @@ public class PlayController {
 
     @FXML
     private Label AdvertenciaText;
-    private String PalabraSecreta;
+    public String PalabraSecreta;
     private List<TextField> textFields = new ArrayList<>();
     int ContadorPistasDadas=0;
     boolean valorDeIntento;
@@ -63,13 +63,6 @@ public class PlayController {
             }
         }
         else DiseñoLabelText(AdvertenciaText,"No puedes usar mas pistas","red" );
-    }
-
-    //Metodo que va a orquestar la interfaz de adivinar la palabra
-    public void AdivinarPalabra(String Palabra) {
-        PalabraSecreta=Palabra;
-        CrearCamposdeTextoEnInterfaz();
-        AsignarSetOnKeyTypedACamposDeTexto();
     }
 
     //Metodo para crear los campos de texto de acuerdo a la longitud de la palabra
@@ -197,6 +190,8 @@ public class PlayController {
         int PosicionCampodeTexto=textFields.indexOf(textField);
         return ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
     }
+
+    //Le cambia el diseño a un label , dandole un mensaje y un color
     protected void  DiseñoLabelText(Label label,String Mensaje,String Color){
         label.setStyle(label.getStyle() + "-fx-text-fill:"+Color+";");
         label.setText(Mensaje);
