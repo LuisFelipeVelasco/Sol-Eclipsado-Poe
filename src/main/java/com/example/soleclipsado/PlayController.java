@@ -56,6 +56,7 @@ public class PlayController {
                     break;//detiene la funcion
                 }
             }
+            //Si usando una pista se completa la palabra mostrar pantalla de victoria
             try {
                 CambiarVistaFinal();
             } catch (IOException e) {
