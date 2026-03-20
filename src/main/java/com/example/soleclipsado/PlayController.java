@@ -87,7 +87,7 @@ public class PlayController {
         return textField;
     }
 
-    //Le asigna a cada texfield el event listener setOnKeyTyped y hace que VerificarPalabra se encargue del evento
+    //Le asigna a cada texfield el event listener setOnKeyTyped y hace que ControladorCampoDeTexto se encargue del evento
     protected void AsignarSetOnKeyTypedACamposDeTexto(){
 
         for (TextField textField : textFields){
@@ -127,9 +127,7 @@ public class PlayController {
     //Verifica que la entrada en un campo de texto coincida con la letra de la palabra secreta en esa posicion
     protected  boolean VerificarEntradaCoincideEnPalabraSecreta(TextField textField,String Entrada){
 
-        List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
-        int PosicionCampodeTexto=textFields.indexOf(textField);
-        String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
+        String LetraCorrecta= LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(textField);
         if(Objects.equals(LetraCorrecta, Entrada)){
             AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: green;");
             AdvertenciaText.setText("Bien , le atinaste");
@@ -160,11 +158,8 @@ public class PlayController {
 
     //Funcion para qque cada vez que se unda el boton de pista se agregue la letra correspondiente en el campo en el cual se encuentre el usuario
     protected void PistaAgregarLetra(TextField textField){
-        List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
-
-        int PosicionCampodeTexto=textFields.indexOf(textField);//le asigna un numero que actua como su posicion a cada textfield creado
-        String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);////Esto le asigna un numero, a cada letra de la lista PalabraSecreta, de acuerdo con su posicion
-        textField.setText(LetraCorrecta);//Asigna al textField en el que se posicione el usuario la letra correcta
+        String LetraPalabraSecreta=LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(textField);
+        textField.setText(LetraPalabraSecreta);//Asigna al textField en el que se posicione el usuario la letra correcta
         ContadorLetrasAcertadas+=1;
 
         System.out.println("Todo chido");
@@ -209,10 +204,7 @@ public class PlayController {
 
     //funcion que guarda los aciertos del jugador
     protected int JugadorGana(TextField textField, String Entrada){
-
-        List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
-        int PosicionCampodeTexto=textFields.indexOf(textField);
-        String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
+        String LetraCorrecta= LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(textField);
         if(Objects.equals(LetraCorrecta, Entrada)){
             ContadorLetrasAcertadas+=1;
             return ContadorLetrasAcertadas;
@@ -223,13 +215,17 @@ public class PlayController {
     protected int GuardarGana(TextField textField, String Entrada){
 
         List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
-        int PosicionCampodeTexto=textFields.indexOf(textField);
-        String LetraCorrecta= ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
-        if (ContadorLetrasAcertadas==ListaLetrasPalabraSecreta.size()){ // si el contador g proveniente de la funcion JugadorGana es igual a la cantidad de letras en ListaLetrasPalabraSecreta, cambia el valor de Exito para que la funcion CambiarVistaFinal lo tome distinto de cero y arroje la vista ganador
+        if (ContadorLetrasAcertadas==ListaLetrasPalabraSecreta.size()){ // si el ContadorLetrasAcertadas proveniente de la funcion JugadorGana es igual a la cantidad de letras en ListaLetrasPalabraSecreta, cambia el valor de Exito para que la funcion CambiarVistaFinal lo tome distinto de cero y arroje la vista ganador
             Exito=ContadorLetrasAcertadas;
             return Exito;
         }
         return Exito;}
+
+    protected String LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(TextField textField){
+        List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
+        int PosicionCampodeTexto=textFields.indexOf(textField);
+        return ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
+    }
 }
 
 
