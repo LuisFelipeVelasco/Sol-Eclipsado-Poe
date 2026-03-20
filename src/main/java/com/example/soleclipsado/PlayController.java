@@ -45,7 +45,6 @@ public class PlayController {
     protected void onActionButtonClicked(){
         if (ContadorPistasDadas<NumeroMaximoPistasDadas){ //Debe ser menor para no dar mas pistas que el numero maximo
             ContadorPistasDadas+=1;
-            DiseñoLabelText(AdvertenciaText,"Numero de pistas restantes:" + ((NumeroMaximoPistasDadas-ContadorPistasDadas)+""),"green" );
             for(TextField textField : textFields){//Recorre toda la lista de textfields
                 if(textField.getText().isEmpty()){//encuentra el primer textfield vacio
                     PistaAgregarLetra(textField);//llama al Metodo PistaAgregarLetra pasandole como parametro dicho textfield
@@ -88,13 +87,13 @@ public class PlayController {
     protected void AsignarSetOnKeyTypedACamposDeTexto(){
 
         for (TextField textField : textFields){
-            textField.setOnKeyTyped(this::ControladorCampoDeTexto);
+            textField.textProperty().addListener((observable, oldValue, newValue) -> {
+                ControladorCampoDeTexto(textField, newValue);});
         }
     }
     //Metodo que controla/verifica las LetraIngresadaUsuarios de los campos de texto
-    protected void ControladorCampoDeTexto(KeyEvent keyEvent){
-
-        TextField textField=(TextField) keyEvent.getSource();
+    protected void ControladorCampoDeTexto(TextField textField,String LetraIngresadaUsuario){
+        if (LetraIngresadaUsuario.isEmpty()) return;
 
         /* * replaceAll("\\p{M}", "") y toLowerCase(Locale.ROOT) limpian y estandarizan el texto:
          * \\p{M} -> Busca "Marks" (Marcas combinadas), que son los acentos/diéresis sueltos que dejó el NFD.
@@ -102,8 +101,7 @@ public class PlayController {
          * toLowerCase() -> Convierte toda la palabra a minúsculas.
          * Locale.ROOT -> Asegura que la conversión a minúsculas sea universal y no dependa del idioma del sistema.
          */
-        System.out.println(keyEvent.getCharacter());
-        String LetraIngresadaUsuario=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);
+        LetraIngresadaUsuario=Normalizer.normalize(LetraIngresadaUsuario, Normalizer.Form.NFD);
         LetraIngresadaUsuario = LetraIngresadaUsuario.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT);
         System.out.println(LetraIngresadaUsuario);
         if(IngresoDeSoloLetrasEnCampoDeTexto(textField, LetraIngresadaUsuario)){
@@ -151,7 +149,6 @@ public class PlayController {
     protected void PistaAgregarLetra(TextField textField){
         String LetraPalabraSecreta=LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(textField);
         textField.setText(LetraPalabraSecreta);//Asigna al textField en el que se posicione el usuario la letra correcta
-        ContadorLetrasAcertadas+=1;
     }
     //Metodo para cambiar la imagen del sol en caso de que el usuario se equivoque
     //.toExternalForm convierte la URL a texto
