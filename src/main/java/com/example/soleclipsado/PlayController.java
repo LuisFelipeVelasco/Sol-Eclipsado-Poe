@@ -15,8 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.text.Normalizer;
 import java.util.*;
-import java.util.function.ToIntFunction;
-
 
 /*
 @author Luis Felipe Velasco Chilito 2517245-3743
@@ -93,7 +91,7 @@ public class PlayController {
             textField.setOnKeyTyped(this::ControladorCampoDeTexto);
         }
     }
-    //Metodo que controla/verifica las entradas de los campos de texto
+    //Metodo que controla/verifica las LetraIngresadaUsuarios de los campos de texto
     protected void ControladorCampoDeTexto(KeyEvent keyEvent){
 
         TextField textField=(TextField) keyEvent.getSource();
@@ -105,10 +103,10 @@ public class PlayController {
          * Locale.ROOT -> Asegura que la conversión a minúsculas sea universal y no dependa del idioma del sistema.
          */
 
-        String Entrada=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);
-        Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT);
-        if(IngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)==true){
-            valorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);//variable que guarda si el usuario se equivoco o no
+        String LetraIngresadaUsuario=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);
+        LetraIngresadaUsuario = LetraIngresadaUsuario.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT);
+        if(IngresoDeSoloLetrasEnCampoDeTexto(textField, LetraIngresadaUsuario)){
+            valorDeIntento=VerificarLetraIngresadaUsuarioCoincideEnPalabraSecreta(textField,LetraIngresadaUsuario);//variable que guarda si el usuario se equivoco o no
             CambiarSolEclipsado();
             try {
                 CambiarVistaFinal();
@@ -119,9 +117,9 @@ public class PlayController {
     }
 
     //Metodo que Evita que el usuario ingrese un caracter especial o un numero a un campo de texto
-    protected boolean IngresoDeSoloLetrasEnCampoDeTexto(TextField textField,String Entrada){
+    protected boolean IngresoDeSoloLetrasEnCampoDeTexto(TextField textField,String LetraIngresadaUsuario){
 
-        if (!Entrada.matches("\\p{L}+") && !Entrada.isEmpty()) {
+        if (!LetraIngresadaUsuario.matches("\\p{L}+") && !LetraIngresadaUsuario.isEmpty()) {
             AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: red;");
             AdvertenciaText.setText("Ojo..  nada de numeros o caracteres especiales");
             textField.setText("");
@@ -130,17 +128,17 @@ public class PlayController {
         return true;
     }
 
-    //Metodo que verifica que la entrada en un campo de texto coincida con la letra de la palabra secreta en esa posicion
-    protected  boolean VerificarEntradaCoincideEnPalabraSecreta(TextField textField,String Entrada){
+    //Metodo que verifica que la LetraIngresadaUsuario en un campo de texto coincida con la letra de la palabra secreta en esa posicion
+    protected  boolean VerificarLetraIngresadaUsuarioCoincideEnPalabraSecreta(TextField textField,String LetraIngresadaUsuario){
 
         String LetraCorrecta= LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(textField);
-        if(Objects.equals(LetraCorrecta, Entrada)){
+        if(Objects.equals(LetraCorrecta, LetraIngresadaUsuario)){
             DiseñoLabelText(AdvertenciaText,"Bien ahi, le atinaste", "green");
             textField.setDisable(true); //Ya no se puede moficar el textField
             ContadorLetrasAcertadas+=1;
             return true;
         }
-        else if (!LetraCorrecta.equalsIgnoreCase(Entrada) && !Entrada.isEmpty()){ //Si las letras no coinciden y es no vacio entonces retornar falso y dejar vacio el campo de texto
+        else if (!LetraCorrecta.equalsIgnoreCase(LetraIngresadaUsuario) && !LetraIngresadaUsuario.isEmpty()){ //Si las letras no coinciden y es no vacio entonces retornar falso y dejar vacio el campo de texto
             DiseñoLabelText(AdvertenciaText,"Nope,Esa no es la letra","red");
             textField.setText("");
             return false;

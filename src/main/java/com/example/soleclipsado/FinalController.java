@@ -32,7 +32,6 @@ public class FinalController {
         Scene scene = new Scene(root, 400, 400);
         stage.setScene(scene);
         stage.show();
-
     }
     public void cambiarLabelPerdedor(){
         TextoFinal.setText("Intentos terminados,Perdiste");
@@ -40,7 +39,5 @@ public class FinalController {
     public void cambiarLabelGanador(){
         TextoFinal.setText("¡¡GANASTE!!");
     }
-
-
 
 }
