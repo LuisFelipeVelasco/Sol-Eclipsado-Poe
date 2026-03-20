@@ -100,7 +100,6 @@ public class PlayController {
         TextField textField=(TextField) keyEvent.getSource();
         String Entrada=Normalizer.normalize(keyEvent.getCharacter(), Normalizer.Form.NFD);// Se llama a la libreria Normalizer para usar su funcion normalize y separar las tildes de las letras
         Entrada = Entrada.replaceAll("\\p{M}", "").toLowerCase(Locale.ROOT); // esta funcion utiliza el replaceAll para quitar las tildes y usa la funcion LowerCase para pasar todo a minusculas y guardarlo todo en la variable Entrada
-        GuardarGana(textField,Entrada);
         if(IngresoDeSoloLetrasEnCampoDeTexto(textField,Entrada)==true){
             valorDeIntento=VerificarEntradaCoincideEnPalabraSecreta(textField,Entrada);//variable que guarda si el usuario se equivoco o no
             CambiarSolEclipsado();
@@ -178,7 +177,7 @@ public class PlayController {
     protected void CambiarVistaFinal() throws IOException {
 
         boolean JugadorPierde = (ContadorEstadoImagenSolEclipsado==6);
-        boolean JugadorGana = (ContadorEstadoImagenSolEclipsado<6 && JugadorAcertoTodasLasLetras==true);
+        boolean JugadorGana = (ContadorEstadoImagenSolEclipsado<6 && ValidarJugadorAcertoTodasLasLetras());
 
         if(JugadorPierde || JugadorGana){
 
@@ -197,14 +196,11 @@ public class PlayController {
     }
 
     //funcion que guarda el Exito del jugador en caso de que haya acertado todas las letras de la palabra secreta
-    protected boolean GuardarGana(TextField textField, String Entrada){
+    protected boolean ValidarJugadorAcertoTodasLasLetras() {
 
         List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
-        if (ContadorLetrasAcertadas==ListaLetrasPalabraSecreta.size()){ // si el ContadorLetrasAcertadas proveniente de la funcion JugadorGana es igual a la cantidad de letras en ListaLetrasPalabraSecreta, cambia el valor de Exito para que la funcion CambiarVistaFinal lo tome distinto de cero y arroje la vista ganador
-            JugadorAcertoTodasLasLetras=true;
-            return JugadorAcertoTodasLasLetras;
-        }
-        return JugadorAcertoTodasLasLetras;}
+        return ContadorLetrasAcertadas == ListaLetrasPalabraSecreta.size();         // si el ContadorLetrasAcertadas  es igual a la cantidad de letras en ListaLetrasPalabraSecreta, retorna verdader
+    }
 
     protected String LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(TextField textField){
         List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
