@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.text.Normalizer;
 import java.util.*;
+import java.util.function.ToIntFunction;
 
 
 /*
@@ -128,15 +129,13 @@ public class PlayController {
 
         String LetraCorrecta= LetraDePalabraSecretaSegunCampoDeTextoSeleccionado(textField);
         if(Objects.equals(LetraCorrecta, Entrada)){
-            AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: green;");
-            AdvertenciaText.setText("Bien , le atinaste");
+            DiseñoLabelText(AdvertenciaText,"Bien ahi, le atinaste", "green");
             textField.setDisable(true); //Ya no se puede moficar el textField
             ContadorLetrasAcertadas+=1;
             return true;
         }
         else if (!LetraCorrecta.equalsIgnoreCase(Entrada) && !Entrada.isEmpty()){ //Si las letras no coinciden y es no vacio entonces retornar falso y dejar vacio el campo de texto
-            AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: red;");
-            AdvertenciaText.setText("Nope, la letra no coincide");
+            DiseñoLabelText(AdvertenciaText,"Nope,Esa no es la letra","red");
             textField.setText("");
             return false;
         }
@@ -149,11 +148,9 @@ public class PlayController {
 
         if(ContadorPistasDadas<=3){
             ContadorPistasDadas+=1;
-            AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: green;");
-            AdvertenciaText.setText("numero de pistas restantes: "+(3-ContadorPistasDadas)+" ");
+            DiseñoLabelText(AdvertenciaText,"Numero de pistas restantes:" + ((3-ContadorPistasDadas)+""),"green" );
         }else{
-            AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: red;");
-            AdvertenciaText.setText("numero de pistas acabados");
+            DiseñoLabelText(AdvertenciaText,"No puedes usar mas pistas","red" );
         }
     }
 
@@ -208,6 +205,10 @@ public class PlayController {
         List<String> ListaLetrasPalabraSecreta = Arrays.asList(PalabraSecreta.split("")); //Cada letra de la palabra secreta es un elemento de la lista ListaLetrasPalabraSecreta
         int PosicionCampodeTexto=textFields.indexOf(textField);
         return ListaLetrasPalabraSecreta.get(PosicionCampodeTexto);
+    }
+    protected void  DiseñoLabelText(Label label,String Mensaje,String Color){
+        label.setStyle(label.getStyle() + "-fx-text-fill:"+Color+";");
+        label.setText(Mensaje);
     }
 }
 
