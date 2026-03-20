@@ -40,14 +40,14 @@ public class PlayController {
     boolean valorDeIntento;
     int ContadorEstadoImagenSolEclipsado=1;
     int ContadorLetrasAcertadas=0;
-    boolean JugadorAcertoTodasLasLetras=false;
+    int NumeroMarximoPistasDadas=3;
 
 
     @FXML
     //Funcion que se activa cada vex que el boton pista es precionado
     protected void onActionButtonClicked(){
-        int Contador=ContadorPista();// Este contador asegura que el boton no pueda ser usado mas de 3 veces
-        if (Contador<=3){
+        SumarContadorPistaDada();
+        if (ContadorPistasDadas<=NumeroMarximoPistasDadas){
             for(TextField textField : textFields){//Recorre toda la lista de textfields
                 if(textField.getText().isEmpty()){//encuentra el primer textfield vacio
                     PistaAgregarLetra(textField);//llama a la funcion PistaAgregarLetra pasandole como parametro dicho textfield
@@ -122,6 +122,7 @@ public class PlayController {
         }
         return true;
     }
+
     //Verifica que la entrada en un campo de texto coincida con la letra de la palabra secreta en esa posicion
     protected  boolean VerificarEntradaCoincideEnPalabraSecreta(TextField textField,String Entrada){
 
@@ -142,8 +143,9 @@ public class PlayController {
         return true;
     }
 
+
     //Funcion para contar las veces que el usuario puede usar una pista
-    protected int ContadorPista(){
+    protected void SumarContadorPistaDada(){
 
         if(ContadorPistasDadas<=3){
             ContadorPistasDadas+=1;
@@ -153,7 +155,7 @@ public class PlayController {
             AdvertenciaText.setStyle(AdvertenciaText.getStyle() + "-fx-text-fill: red;");
             AdvertenciaText.setText("numero de pistas acabados");
         }
-    return ContadorPistasDadas;}
+    }
 
     //Funcion para qque cada vez que se unda el boton de pista se agregue la letra correspondiente en el campo en el cual se encuentre el usuario
     protected void PistaAgregarLetra(TextField textField){
