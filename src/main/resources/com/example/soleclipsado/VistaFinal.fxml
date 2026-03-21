@@ -49,7 +49,7 @@
             </Label>
 
             <!-- Botón de regreso: Von Restorff — único CTA, máximo contraste, invita a jugar de nuevo -->
-            <Button fx:id="buttonFinal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHelloButtonClicked" prefHeight="44.0" prefWidth="220.0" style="-fx-font-size: 16;                       -fx-font-family: 'Georgia';                       -fx-font-weight: bold;                       -fx-background-color: linear-gradient(to right, #EDCD81, #F5A623);                       -fx-text-fill: #1a1a2e;                       -fx-border-width: 0;                       -fx-background-radius: 22;                       -fx-cursor: hand;                       -fx-effect: dropshadow(gaussian, rgba(237,205,129,0.6), 18, 0.3, 0, 4);" text="↩  Vuelve a jugar">
+            <Button fx:id="buttonFinal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ButtonClicked" prefHeight="44.0" prefWidth="220.0" style="-fx-font-size: 16;                       -fx-font-family: 'Georgia';                       -fx-font-weight: bold;                       -fx-background-color: linear-gradient(to right, #EDCD81, #F5A623);                       -fx-text-fill: #1a1a2e;                       -fx-border-width: 0;                       -fx-background-radius: 22;                       -fx-cursor: hand;                       -fx-effect: dropshadow(gaussian, rgba(237,205,129,0.6), 18, 0.3, 0, 4);" text="↩  Vuelve a jugar">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>

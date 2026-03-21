@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -27,7 +26,7 @@ import javafx.stage.Stage;
  * @version 1.0.4
  * @see PlayController
  */
-public class HelloController {
+public class HelloController implements Button {
 
     /** Etiqueta que muestra mensajes de advertencia o retroalimentación al usuario. */
     @FXML
@@ -60,7 +59,7 @@ public class HelloController {
      * @throws IOException si el archivo FXML de la siguiente vista no puede cargarse.
      */
     @FXML
-    protected void onHelloButtonClick() throws IOException {
+    public void ButtonClicked() throws IOException {
         if (VerificarCaracteresEspeciales() && VerificarLongitudPalabra()) {
             String PalabraSecreta = ObtenerPalabraVerificada();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaAdivinarPalabra.fxml"));

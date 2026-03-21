@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -33,7 +32,7 @@ import java.util.*;
  * @see PlayController
  * @see HelloController
  */
-public class FinalController {
+public class FinalController implements Button{
 
     /** Panel raíz de la vista final; usado para obtener el {@link Stage} activo. */
     @FXML
@@ -58,7 +57,7 @@ public class FinalController {
      * @throws IOException si el archivo {@code VistaPalabra.fxml} no puede cargarse.
      */
     @FXML
-    protected void onHelloButtonClicked() throws IOException {
+    public void ButtonClicked() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("VistaPalabra.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) RootPane.getScene().getWindow();

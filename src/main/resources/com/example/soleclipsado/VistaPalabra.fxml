@@ -60,7 +60,7 @@
             </Label>
 
             <!-- Botón JUGAR con efecto Von Restorff: destaca sobre todo -->
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHelloButtonClick" prefHeight="44.0" prefWidth="215.0" style="-fx-font-size: 17;                       -fx-font-family: 'Georgia';                       -fx-font-weight: bold;                       -fx-letter-spacing: 2;                       -fx-background-color: linear-gradient(to right, #EDCD81, #F5A623);                       -fx-text-fill: #1a1a2e;                       -fx-border-width: 0;                       -fx-background-radius: 22;                       -fx-cursor: hand;                       -fx-effect: dropshadow(gaussian, rgba(237,205,129,0.6), 16, 0.3, 0, 3);" text="✦  JUGAR  ✦">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ButtonClicked" prefHeight="44.0" prefWidth="215.0" style="-fx-font-size: 17;                       -fx-font-family: 'Georgia';                       -fx-font-weight: bold;                       -fx-letter-spacing: 2;                       -fx-background-color: linear-gradient(to right, #EDCD81, #F5A623);                       -fx-text-fill: #1a1a2e;                       -fx-border-width: 0;                       -fx-background-radius: 22;                       -fx-cursor: hand;                       -fx-effect: dropshadow(gaussian, rgba(237,205,129,0.6), 16, 0.3, 0, 3);" text="✦  JUGAR  ✦">
                <VBox.margin>
                   <Insets top="25.0" />
                </VBox.margin>

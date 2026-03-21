@@ -32,7 +32,7 @@ import java.util.*;
  * @see HelloController
  * @see FinalController
  */
-public class PlayController {
+public class PlayController implements Button {
 
     /** Contenedor horizontal que aloja los {@link TextField} de cada letra. */
     @FXML
@@ -86,7 +86,7 @@ public class PlayController {
      * </p>
      */
     @FXML
-    protected void onActionButtonClicked() {
+    public void ButtonClicked() {
         if (ContadorPistasDadas < NumeroMaximoPistasDadas) {
             ContadorPistasDadas += 1;
             for (TextField textField : textFields) {
