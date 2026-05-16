@@ -2,6 +2,6 @@ package com.example.soleclipsado;
 
 import java.io.IOException;
 
-public interface Button {
+public interface Interfaz {
     void ButtonClicked() throws IOException;
 }

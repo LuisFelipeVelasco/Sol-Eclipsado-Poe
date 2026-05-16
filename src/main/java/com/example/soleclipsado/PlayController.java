@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -32,7 +31,7 @@ import java.util.*;
  * @see HelloController
  * @see FinalController
  */
-public class PlayController implements Button {
+public class PlayController implements Interfaz {
 
     /** Contenedor horizontal que aloja los {@link TextField} de cada letra. */
     @FXML

@@ -5,7 +5,6 @@ import java.text.Normalizer;
 import java.util.Locale;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -26,7 +25,7 @@ import javafx.stage.Stage;
  * @version 1.0.4
  * @see PlayController
  */
-public class HelloController implements Button {
+public class HelloController implements Interfaz {
 
     /** Etiqueta que muestra mensajes de advertencia o retroalimentación al usuario. */
     @FXML

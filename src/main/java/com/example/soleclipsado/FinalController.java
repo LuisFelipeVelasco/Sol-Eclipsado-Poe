@@ -5,18 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.PasswordAuthentication;
-import java.text.Normalizer;
-import java.util.*;
 
 /**
  * Controlador de la vista final {@code VistaFinal.fxml}.
@@ -32,7 +26,7 @@ import java.util.*;
  * @see PlayController
  * @see HelloController
  */
-public class FinalController implements Button{
+public class FinalController implements Interfaz {
 
     /** Panel raíz de la vista final; usado para obtener el {@link Stage} activo. */
     @FXML
